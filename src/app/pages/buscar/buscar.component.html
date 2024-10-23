@@ -1,0 +1,30 @@
+<section>
+<form #buscarForm="ngForm" (change)="buscar()">
+    <div id="barra-busqueda">
+        <img src="./../../../assets/icons/lupa.svg" alt="Lupa">
+        <input type="text" name="texto" [(ngModel)]="parametrosBusqueda.texto">
+    </div>
+    <div id="filtros-container">
+        <div class="apto-container">
+            <img src="./../../../assets/icons/celiaco.png" alt="Apto Celiaco">
+            <input type="checkbox" name="celiaco" id="celiaco" [(ngModel)]="parametrosBusqueda.aptoCeliaco">
+            <span>Apto Celiaco</span>
+        </div>
+        <div class="apto-container">
+            <img src="./../../../assets/icons/vegano.svg" alt="Apto Vegano">
+            <input type="checkbox" name="vegano" id="vegano" [(ngModel)]="parametrosBusqueda.aptoVegano">
+            <span>Apto Vegano</span>
+        </div>
+    </div>
+</form>
+<div id="contenedor-productos" *ngIf="productos().length !==0; else sinResultado">
+    <app-tarjeta-producto 
+    *ngFor ="let producto of productos()"
+    [producto]="producto"
+    [routerLink]="['/articulo', producto.id]"
+    /> 
+</div>
+<ng-template #sinResultado>
+    <h2>Tu busqueda no arrojo ningun resultado</h2>
+</ng-template>
+</section>
